@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks To Do..</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div id="hdiv">
+            <h1 id="h1">Tasks</h1>
+            <h1 id="h2">List</h1>
+        </div>
+    </header>
+    <!-- Body -->
+    <section style="background-color: #F7F7F7 0% 0% no-repeat padding-box;">
+        <div id="mdiv">
+            <div id="bd1">
+
+                <button id="b1" onclick="add()">
+                    +
+                </button>
+                <button id="b2" onclick="add()">Add New Task</button>
+            </div>
+            <div id="box-div">
+            </div>
+        </div>
+    <!-- tasks section -->
+    </section>
+    <script type="text/javascript">
+        var j = 1;
+        var boxid = 1;
+
+        function add() {
+            var head1 = String(prompt("Please Enter the Task Name"));
+            if (head1) {
+                var item1 = Number(prompt("Enter Number of Tasks "));
+                var arr1 = new Array();
+                for (var i = 0; i < item1; i++) {
+                    arr1[i] = prompt("ENTER " + (i + 1) + " ELEMENT");
+                }
+                var boxd = document.getElementById("box-div");
+                var box1 = document.createElement("div");
+                box1.className = "box";
+                box1.id = `boxy${boxid}`;
+                boxid++;
+                box1.innerHTML += `<div id="box-head"><h3 onclick="boxy(${box1.id})">${head1}</h3></div>`;
+                for (var i = 0; i < item1; i++) {
+                    if (arr1[i] != "") {
+                        box1.innerHTML += `<h4>             
+                                        <input type="checkbox" id="id${j}" onclick="checkl(id${j},label${j})">
+                                        <label for="id${j}" id="label${j}">${arr1[i]}</label>
+                                </h4>`;
+                        j++;
+                    }
+                }
+                if (head1 && item1) {
+                    boxd.appendChild(box1);
+                }
+
+
+            }
+        }
+        function boxy(bid) {
+            var box = bid
+            var ans = String(prompt("Do you want to add items in this list?(yes / no)"));
+            if (ans == "y" || ans=="yes") {
+                var item1 = Number(prompt("Enter Number of items"));
+                var arr1 = new Array();
+                for (var i = 0; i < item1; i++) {
+                    arr1[i] = prompt("ENTER " + (i + 1) + " ELEMENT");
+                }
+                for (var i = 0; i < item1; i++) {
+                    if (arr1[i] != "") {
+                        box.innerHTML += `<h4>             
+                                        <input type="checkbox" id="id${j}" onclick="checkl(id${j},label${j})">
+                                        <label for="id${j}" id="label${j}">${arr1[i]}</label>
+                                </h4>`;
+                        j++;
+                    }
+                }
+            }
+            else {
+                alert("No Elements were added!!");
+            }
+        }
+        function checkl(idd, labell) {
+            var checkb = idd;
+            var lebel = labell;
+            if (checkb.checked == true) {
+                labell.style.textDecorationLine = "line-through";
+                labell.style.color = "#C2C2C2";
+            } else {
+                labell.style.textDecorationLine = "none";
+                labell.style.color = "#424242";
+            }
+        }
+    </script>
+</body>
+
+</html>
